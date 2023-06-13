@@ -1,0 +1,43 @@
+﻿@model PruebaTecnica.ViewModels.UpdateEquipoViewModel
+<div class="modal fade" tabindex="-1" id="editarEquipo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nuevo Equipo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form >
+                    <!-- Campos del formulario -->
+                    <div class="mb-3">
+                        <label for="IdMarca" class="form-label">Marca</label>
+                        <select class="form-select" id="IdMarca" name="IdMarca">
+                            @foreach (var marca in Model.LstMarcas)
+                            {
+                                <option value="@marca.IdMarca" selected="@((Model.Equipo.IdMarca == marca.IdMarca) ? "selected" : null)">@marca.NombreMarca</option>
+                                
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="NombreEquipo" class="form-label">Nombre Equipo</label>
+                        <input type="text" class="form-control" id="NombreEquipo" name="NombreEquipo" value="@Model.Equipo.NombreEquipo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="Descripcion" name="Descripcion" value="@Model.Equipo.Descripcion">
+                    </div>
+                    <div class="mb-3">
+                        <label for="NumeroSerie" class="form-label">Número de Serie</label>
+                        <input type="text" class="form-control" id="NumeroSerie" name="NumeroSerie" value="@Model.Equipo.NumeroSerie">
+                    </div>
+                    <!-- Botones de acción -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" onclick="editarEquipo(@Model.Equipo.IdEquipo)">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

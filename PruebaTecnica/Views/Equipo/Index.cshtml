@@ -1,0 +1,38 @@
+﻿@model IEnumerable<PruebaTecnica.Models.Equipo>
+
+@{
+    ViewData["Title"] = "Equipos";
+}
+
+<div id="PlaceHolder"></div>
+
+<h1>Equipos</h1>
+<button class="btn btn-info" type="button" data-toggle="ajax-modal" data-target="#nuevoEquipo" data-url="@Url.Action("_NuevoEquipo", "Equipo")">
+    Nuevo Equipo
+</button>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Marca</th>
+        <th>Nombre Equipo</th>
+        <th>Numero Serie</th>
+        <th>Descripcion</th>
+        <th>Acciones</th>
+    </tr>
+    @foreach (var equipo in Model)
+    {
+
+        <tr>
+            <td>@equipo.IdEquipo</td>
+            <td>@equipo.Marca.NombreMarca</td>
+            <td>@equipo.NombreEquipo</td>
+            <td>@equipo.NumeroSerie</td>
+            <td>@equipo.Descripcion</td>
+            <td>
+                <button class="btn btn-primary" onclick="editarEquipoModal(@equipo.IdEquipo)">Editar</button>
+                <button class="btn btn-danger" onclick="eliminarEquipo(@equipo.IdEquipo)">Eliminar</button>
+            </td>
+        </tr>
+    }
+</table>

@@ -14,6 +14,7 @@ builder.Services.AddDbContext<EquiposDbContext>(options => options.UseSqlServer(
 
 //Inyección de dependencias
 builder.Services.AddScoped<IMarcaRepository, MarcaRepository>();
+builder.Services.AddScoped<IEquipoRepository, EquipoRepository>();
 
 var app = builder.Build();
 

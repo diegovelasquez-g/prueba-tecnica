@@ -1,6 +1,4 @@
-﻿function displayAlert() {
-    Swal.fire("Marca guardada con éxito");
-}
+﻿//Marcas
 
 $(function () {
     var PlaceHolderElement = $('#PlaceHolder');
@@ -82,6 +80,106 @@ function eliminarMarca(marcaId) {
                 url: '/Marca/EliminarMarca',
                 type: 'DELETE',
                 data: { marcaId: marcaId },
+                success: function (result) {
+                    if (result.success) {
+                        Swal.fire({
+                            title: '¡Eliminado!',
+                            text: result.message,
+                            icon: 'success'
+                        }).then(function () {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Hubo un error al eliminar el registro',
+                            icon: 'error'
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Hubo un error al eliminar el registro',
+                        icon: 'error'
+                    });
+                }
+            });
+        }
+    });
+}
+
+
+//Equipos
+function editarEquipoModal(equipoId) {
+    $.ajax({
+        url: '/Equipo/_ModificarEquipo',
+        type: 'POST',
+        data: { equipoId: equipoId },
+        success: function (result) {
+            $('#PlaceHolder').html(result);
+            $('#editarEquipo').modal('show');
+        },
+        error: function (xhr, status, error) {
+
+        }
+    });
+}
+
+function editarEquipo(equipoId) {
+    var equipo = {
+        IdEquipo: equipoId,
+        IdMarca: $('#IdMarca').val(),
+        NombreEquipo: $('#NombreEquipo').val(),
+        Descripcion: $('#Descripcion').val(),
+        NumeroSerie: $('#NumeroSerie').val(),
+    };
+
+    $.ajax({
+        url: '/Equipo/ModificarEquipo',
+        type: 'POST',
+        data: equipo,
+        success: function (result) {
+            if (result.success) {
+                Swal.fire({
+                    title: '¡Actualizado!',
+                    text: result.message,
+                    icon: 'success'
+                }).then(function () {
+                    location.reload();
+                });
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error al actualizar el registro',
+                    icon: 'error'
+                });
+            }
+        },
+        error: function (xhr, status, error) {
+            Swal.fire({
+                title: 'Error',
+                text: 'Hubo un error al actualizar el registro',
+                icon: 'error'
+            });
+        }
+    });
+}
+
+function eliminarEquipo(equipoId) {
+    Swal.fire({
+        title: 'Confirmar eliminación',
+        text: '¿Está seguro de que desea eliminar este registro?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then(function (result) {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '/Equipo/EliminarEquipo',
+                type: 'DELETE',
+                data: { equipoId: equipoId },
                 success: function (result) {
                     if (result.success) {
                         Swal.fire({
