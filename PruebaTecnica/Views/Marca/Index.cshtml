@@ -1,0 +1,27 @@
+﻿@model IEnumerable<PruebaTecnica.Models.Marca>
+
+@{
+    ViewData["Title"] = "Marcas";
+}
+
+<h1>Marcas</h1>
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Marca</th>
+        <th>Descripción</th>
+        <th>Herramienta</th>
+        <th>Exactitud</th>
+    </tr>
+    @foreach(var marca in Model)
+    {
+        <tr>
+            <td>@marca.IdMarca</td>
+            <td>@marca.NombreMarca</td>
+            <td>@marca.Descripcion</td>
+            <td>@marca.Herramienta</td>
+            <td>@marca.Exactitud</td>
+        </tr>
+    }
+</table>
+
