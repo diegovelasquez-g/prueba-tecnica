@@ -4,7 +4,13 @@
     ViewData["Title"] = "Marcas";
 }
 
+<div id="PlaceHolder"></div>
+
 <h1>Marcas</h1>
+<button class="btn btn-info" type="button" data-toggle="ajax-modal" data-target="#nuevaMarca" data-url="@Url.Action("_NuevaMarca", "Marca")">
+    Nueva Marca
+</button>
+
 <table class="table">
     <tr>
         <th>Id</th>
@@ -12,8 +18,9 @@
         <th>Descripción</th>
         <th>Herramienta</th>
         <th>Exactitud</th>
+        <th>Acciones</th>
     </tr>
-    @foreach(var marca in Model)
+    @foreach (var marca in Model)
     {
         <tr>
             <td>@marca.IdMarca</td>
@@ -21,7 +28,10 @@
             <td>@marca.Descripcion</td>
             <td>@marca.Herramienta</td>
             <td>@marca.Exactitud</td>
+            <td>
+                <button class="btn btn-primary" onclick="editarMarcaModal(@marca.IdMarca)">Editar</button>
+                <button class="btn btn-danger" onclick="eliminarMarca(@marca.IdMarca)">Eliminar</button>
+            </td>
         </tr>
     }
 </table>
-

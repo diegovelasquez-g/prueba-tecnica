@@ -1,0 +1,43 @@
+﻿@model PruebaTecnica.Models.Marca
+
+<div class="modal fade modalEditarMarca" tabindex="-1" id="modalEditarMarca">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Marca</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form >
+                    <!-- Campos del formulario -->
+                    <div class="mb-3">
+                        <label for="NombreMarca" class="form-label">Marca</label>
+                        <input type="text" class="form-control" id="NombreMarca" name="NombreMarca" value="@Model.NombreMarca">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcionInput" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="descripcionInput" name="Descripcion" value="@Model.Descripcion">
+                    </div>
+                    <div class="mb-3">
+                        <label for="tipoHerramientaInput" class="form-label">Tipo de Herramienta</label>
+                        <select class="form-select" id="tipoHerramientaInput" name="Herramienta">
+                            <option value="Registradores" selected="@((Model.Herramienta == "Registradores") ? "selected" : null)">Registradores</option>
+                            <option value="Pinzas" selected="@((Model.Herramienta == "Pinzas") ? "selected" : null)">Pinzas</option>
+                            <option value="Cableado" selected="@((Model.Herramienta == "Cableado") ? "selected" : null)">Cableado</option>
+                        </select>
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="exactitudInput" class="form-label">Exactitud</label>
+                        <input type="text" class="form-control" id="exactitudInput" name="Exactitud" value="@Model.Exactitud">
+                    </div>
+                    <!-- Botones de acción -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" onclick="editarMarca(@Model.IdMarca)"  class="btn btn-primary">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -12,18 +12,28 @@ namespace PruebaTecnica.Repositories
         }
 
         public Marca CreateMarca(Marca marca)
-        {
-            throw new NotImplementedException();
+        {   
+            _equiposDbContext.Marcas.Add(marca);
+            _equiposDbContext.SaveChanges();
+            return marca;
         }
 
         public Marca UpdateMarca(Marca marca)
         {
-            throw new NotImplementedException();
+            _equiposDbContext.Update(marca);
+            _equiposDbContext.SaveChanges();
+            return marca;
         }
 
         public Marca DeleteMarca(int id)
         {
-            throw new NotImplementedException();
+            Marca marca = _equiposDbContext.Marcas.Find(id);
+            if(marca != null)
+            {
+                _equiposDbContext.Marcas.Remove(marca);
+                _equiposDbContext.SaveChanges();
+            } 
+            return marca;
         }
 
         public IEnumerable<Marca> GetAllMarcas()
@@ -33,7 +43,7 @@ namespace PruebaTecnica.Repositories
 
         public Marca GetMarca(int id)
         {
-            throw new NotImplementedException();
+            return _equiposDbContext.Marcas.FirstOrDefault(m => m.IdMarca == id);
         }
     }
 }
