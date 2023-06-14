@@ -6,19 +6,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="@Url.Action("NuevaMarca", "Marca")">
+                <form method="post" action="@Url.Action("NuevaMarca", "Marca")" id="nuevaMarcaForm">
                     <!-- Campos del formulario -->
                     <div class="mb-3">
                         <label for="NombreMarca" class="form-label">Marca</label>
-                        <input type="text" class="form-control" id="NombreMarca" name="NombreMarca">
+                        <input type="text" class="form-control" id="NombreMarca" name="NombreMarca" required>
                     </div>
                     <div class="mb-3">
                         <label for="descripcionInput" class="form-label">Descripción</label>
-                        <input type="text" class="form-control" id="descripcionInput" name="Descripcion">
+                        <input type="text" class="form-control" id="descripcionInput" name="Descripcion" required>
                     </div>
                     <div class="mb-3">
                         <label for="tipoHerramientaInput" class="form-label">Tipo de Herramienta</label>
-                        <select class="form-select" id="tipoHerramientaInput" name="Herramienta">
+                        <select class="form-select" id="tipoHerramientaInput" name="Herramienta" required>
+                            <option value="">Seleccione una opción</option>
                             <option value="Registradores">Registradores</option>
                             <option value="Pinzas">Pinzas</option>
                             <option value="Cableado">Cableado</option>
@@ -26,15 +27,37 @@
                     </div>
                     <div class="mb-3">
                         <label for="exactitudInput" class="form-label">Exactitud</label>
-                        <input type="text" class="form-control" id="exactitudInput" name="Exactitud">
+                        <input type="text" class="form-control" id="exactitudInput" name="Exactitud" required>
+                        <div id="exactitudError" class="text-danger"></div>
                     </div>
                     <!-- Botones de acción -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" >Guardar</button>
+                        <button type="button" onclick="validarFormulario()" class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function validarFormulario() {
+        var form = $('#nuevaMarcaForm')[0];
+        if (form.checkValidity()) {
+            var input = $('#exactitudInput');
+            var value = input.val();
+            var isValid = /^\d+(\.\d+)?$/.test(value);
+
+            if (isValid) {
+                input.removeClass('is-invalid');
+                $('#exactitudError').text('');
+                form.submit(); // Envía el formulario
+            } else {
+                input.addClass('is-invalid');
+                $('#exactitudError').text('Ingrese un número decimal o entero válido.');
+            }
+        } else {
+            form.reportValidity(); // Muestra los mensajes de validación del navegador
+        }
+    }
+</script>
