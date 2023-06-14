@@ -1,0 +1,41 @@
+﻿@model IEnumerable<PruebaTecnica.Models.Prestamo>
+@{
+    ViewData["Title"] = "Prestamos";
+}
+
+<div id="PlaceHolder"></div>
+
+<h1>Prestamo</h1>
+<button class="btn btn-info" type="button" data-toggle="ajax-modal" data-target="#nuevoPrestamo" data-url="@Url.Action("_NuevoPrestamo", "Prestamo")">
+    Nuevo Prestamo
+</button>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Persona asignada</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Fecha Inicio</th>
+        <th>Fecha Fin</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    @foreach (var prestamo in Model)
+    {
+
+        <tr>
+            <td>@prestamo.IdPrestamo</td>
+            <td>@prestamo.NombrePersona</td>
+            <td>@prestamo.Equipo?.Marca.NombreMarca</td>
+            <td>@prestamo.Equipo?.NombreEquipo</td>
+            <td>@prestamo.FechaInicio.ToString("dd/MM/yyyy")</td>
+            <td>@prestamo.FechaFin.ToString("dd/MM/yyyy")</td>
+            <td>@prestamo.Estado</td>
+            <td>
+                <button class="btn btn-primary" onclick="editarPrestamoModal(@prestamo.IdPrestamo)">Editar</button>
+                <button class="btn btn-danger" onclick="eliminarPrestamo(@prestamo.IdPrestamo)">Eliminar</button>
+            </td>
+        </tr>
+    }
+</table>

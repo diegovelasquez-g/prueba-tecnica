@@ -10,5 +10,6 @@ namespace PruebaTecnica.Models
 
         public DbSet<Marca> Marcas { get; set; }
         public DbSet<Equipo> Equipos { get; set; }
+        public DbSet<Prestamo> Prestamos { get; set; }
     }
 }

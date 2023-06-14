@@ -1,0 +1,50 @@
+﻿@model PruebaTecnica.ViewModels.NewPrestamoViewModel
+
+<div class="modal fade" tabindex="-1" id="nuevoPrestamo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nuevo Prestamo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="@Url.Action("NuevoPrestamo", "Prestamo")">
+                    <!-- Campos del formulario -->
+                    <div class="mb-3">
+                        <label for="NombrePersona" class="form-label">Nombre Persona:</label>
+                        <input type="text" class="form-control" id="NombrePersona" name="NombrePersona">
+                    </div>
+                    <div class="mb-3">
+                        <label for="IdMarca" class="form-label">Marca</label>
+                        <select class="form-select" id="IdMarca" name="IdMarca" onchange="cargarProductos()">
+                            
+                            @foreach (var marca in Model.LstMarcas)
+                            {
+                                <option value="@marca.IdMarca">@marca.NombreMarca</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="IdEquipo" class="form-label">Equipo</label>
+                        <select class="form-select" id="IdEquipo" name="IdEquipo">
+                            <option value=0>Seleccione una marca</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="FechaInicio" class="form-label">Fecha Inicio</label>
+                        <input type="date" class="form-control" id="FechaInicio" name="FechaInicio">
+                    </div>
+                    <div class="mb-3">
+                        <label for="FechaFin" class="form-label">Fecha Fin</label>
+                        <input type="date" class="form-control" id="FechaFin" name="FechaFin">
+                    </div>
+                    <!-- Botones de acción -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

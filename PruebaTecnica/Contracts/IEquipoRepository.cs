@@ -13,5 +13,7 @@ namespace PruebaTecnica.Contracts
         Equipo UpdateEquipo(Equipo equipo);
 
         Equipo DeleteEquipo(int id);
+
+        IEnumerable<Equipo> GetEquiposByMarca(int marcaId);
     }
 }

@@ -48,5 +48,10 @@ namespace PruebaTecnica.Repositories
             _equiposDbContext.SaveChanges();
             return equipo;
         }
+
+        public IEnumerable<Equipo> GetEquiposByMarca(int marcaId)
+        {
+            return _equiposDbContext.Equipos.Where(m => m.IdMarca == marcaId);
+        }
     }
 }
